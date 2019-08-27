@@ -1,6 +1,6 @@
 # Storage Corruption Reporting
 
-[wanderview@google.com](mailto:wanderview@google.com) (Internal Draft, Last updated August 21, 2019)
+[wanderview@google.com](mailto:wanderview@google.com) (Last updated August 26, 2019)
 
 
 ## Introduction
