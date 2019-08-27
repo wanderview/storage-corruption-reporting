@@ -37,7 +37,7 @@ This explainer will propose adding a mechanism for observing when storage corrup
 
 ## API Sketch
 
-We propose to use the existing Reporting API [0] to expose corruption events to sites.  The main extension would be to define a new storage corruption report type:
+We propose to use the existing Reporting API [[0]] to expose corruption events to sites.  The main extension would be to define a new storage corruption report type:
 
 
 ```
@@ -61,7 +61,7 @@ The “action_taken” value would be constrained to an enumeration of defined v
 
 The “debug” value would be allowed to contain browser-specific information about what failed.  For example, chromium browsers might report that the problem was in LevelDB checksums, etc.
 
-These reports would be available via both the server mechanism defined in the Reporting API [1] and the Reporting Observer [2].  The Reporting Observer would let sets programmatically process the corruption report on the client.  There would be no timing guarantees about when the report is issued.
+These reports would be available via both the server mechanism defined in the Reporting API [[1]] and the Reporting Observer [[2]].  The Reporting Observer would let sets programmatically process the corruption report on the client.  There would be no timing guarantees about when the report is issued.
 
 The proposal does not include a new header type.  Instead storage reports would go to the “default” report group similar to intervention, deprecation, and crash report types defined in the Reporting API spec.
 
@@ -76,7 +76,7 @@ An alternative would be to try to define a type of exception that must be thrown
 
 
 1.  There may be a large number of methods and call-sites that would need to be modified to process these new exceptions.
-1.  Storage corruption can be detected by the browser without a method being called.  For example, during quota size calculation [3].  In these cases the browser may wish to wipe the origin immediately.
+1.  Storage corruption can be detected by the browser without a method being called.  For example, during quota size calculation [[3]].  In these cases the browser may wish to wipe the origin immediately.
 1.  Some types of corruption may affect multiple storage subsystems.  This would be confusing if it's reported via an exception thrown from a particular subsystem method call.
 
 For these reasons it would be preferable to use an out-of-band mechanism like the Reporting API.
@@ -102,16 +102,17 @@ TBD after stakeholder review.
 
 Reviewed by:
 
-
-
 *   Darwin Huang
 *   Olivier Yiptong
 
 References:
 
+* \[0]: https://w3c.github.io/reporting
+* \[1]: https://w3c.github.io/reporting/#endpoint-delivery
+* \[2]: https://w3c.github.io/reporting/#observers
+* \[3]: https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API/Browser_storage_limits_and_eviction_criteria
 
-
-*   [0]: https://w3c.github.io/reporting
-*   [1]: https://w3c.github.io/reporting/#endpoint-delivery
-*   [2]: https://w3c.github.io/reporting/#observers
-*   [3]: https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API/Browser_storage_limits_and_eviction_criteria
+[0]: https://w3c.github.io/reporting
+[1]: https://w3c.github.io/reporting/#endpoint-delivery
+[2]: https://w3c.github.io/reporting/#observers
+[3]: https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API/Browser_storage_limits_and_eviction_criteria
