@@ -44,7 +44,7 @@ We propose to use the existing Reporting API [[0]] to expose corruption events t
     {
     	"type": "storage",
     	"reason": "corruption",
-    	"api": "idb",
+    	"api": "indexeddb",
     	"action_taken": "origin_wiped",
     	"debug": <browser specific info>
     }
@@ -55,7 +55,7 @@ The “type” value is the main Reporting API key used to separate this kind of
 
 The “reason” value indicates why the report and action were taken.  The only value would be “corruption” for now, but in the future could include values to indicate deletion due to quota eviction or clear-site-data.
 
-The “api” value is also an enumeration defining the storage subsystem where the corruption was detected; e.g. “idb”, “cache”, “localstorage”.
+The “api” value is also an enumeration defining the storage subsystem where the corruption was detected; e.g. “indexeddb”, “cache”, “localstorage”.
 
 The “action_taken” value would be constrained to an enumeration of defined values; e.g. “none”, “api_wiped”, and “origin_wiped”.  These would indicate if no action was taken, if a particular storage subsystem was wiped, or the entire origin was wiped respectively.
 
