@@ -2,6 +2,8 @@
 
 [wanderview@google.com](mailto:wanderview@google.com)
 
+[Tag Review](https://github.com/w3ctag/design-reviews/issues/419)
+
 ## Introduction
 
 When implementing storage APIs, the browser must deal with the possibility of corrupt content on disk.  This can happen for a number of different reasons:
