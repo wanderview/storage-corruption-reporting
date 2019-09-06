@@ -13,7 +13,7 @@ When implementing storage APIs, the browser must deal with the possibility of co
 1.  External software modifying disk content.
 1.  Browser bugs that cause content to be written in a way that prevents it from being read properly.
 
-Currently the various storage specs largely ignore this issue.  As a result, browser implementations largely design and implement their own strategies for dealing with corruption.  These strategies can range from “don’t touch the disk when it's corrupted” to “wipe the entire origin storage partition”.
+Currently the various storage specs largely ignore this issue.  As a result, browser implementations largely design and implement their own strategies for dealing with corruption.  These strategies can range from "don’t touch the disk when it's corrupted" to "wipe the entire origin storage partition".
 
 For their part, sites are often left in a difficult position.  First, they have little insight into the problem.  While an individual storage operation may throw, it's not clear if its due to a site software error, a bug in the browser, or corrupt storage.  Also, if the browser chooses to wipe storage, then the site may not have any direct indication that there is a problem at all.  The user on that device would just appear to be effectively gone.
 
@@ -32,7 +32,7 @@ This explainer will propose adding a mechanism for observing when storage corrup
 
 
 
-*   This effort will not formalize the exact actions taken by the browser when storage corruption is detected.  Ultimately this needs to be done, but it may be difficult to agree until we can give sites finer grained policy control with something like storage “buckets” or “boxes”.
+*   This effort will not formalize the exact actions taken by the browser when storage corruption is detected.  Ultimately this needs to be done, but it may be difficult to agree until we can give sites finer grained policy control with something like storage "buckets" or "boxes".
 
 
 ## API Sketch
@@ -51,19 +51,19 @@ We propose to use the existing Reporting API [[0]] to expose corruption events t
 ```
 
 
-The “type” value is the main Reporting API key used to separate this kind of report from other kinds of reports.
+The "type” value is the main Reporting API key used to separate this kind of report from other kinds of reports.
 
-The “reason” value indicates why the report and action were taken.  The only value would be “corruption” for now, but in the future could include values to indicate deletion due to quota eviction or clear-site-data.
+The "reason" value indicates why the report and action were taken.  The only value would be "corruption" for now, but in the future could include values to indicate deletion due to quota eviction or clear-site-data.
 
-The “api” value is also an enumeration defining the storage subsystem where the corruption was detected; e.g. “indexeddb”, “cache”, “localstorage”.
+The "api" value is also an enumeration defining the storage subsystem where the corruption was detected; e.g. "indexeddb", "cache", "localstorage".
 
-The “action_taken” value would be constrained to an enumeration of defined values; e.g. “none”, “api_wiped”, and “origin_wiped”.  These would indicate if no action was taken, if a particular storage subsystem was wiped, or the entire origin was wiped respectively.
+The "action_taken" value would be constrained to an enumeration of defined values; e.g. "none", "api_wiped", and "origin_wiped".  These would indicate if no action was taken, if a particular storage subsystem was wiped, or the entire origin was wiped respectively.
 
-The “debug” value would be allowed to contain browser-specific information about what failed.  For example, chromium browsers might report that the problem was in LevelDB checksums, etc.
+The "debug" value would be allowed to contain browser-specific information about what failed.  For example, chromium browsers might report that the problem was in LevelDB checksums, etc.
 
 These reports would be available via both the server mechanism defined in the Reporting API [[1]] and the Reporting Observer [[2]].  The Reporting Observer would let sets programmatically process the corruption report on the client.  There would be no timing guarantees about when the report is issued.
 
-The proposal does not include a new header type.  Instead storage reports would go to the “default” report group similar to intervention, deprecation, and crash report types defined in the Reporting API spec.
+The proposal does not include a new header type.  Instead storage reports would go to the "default" report group similar to intervention, deprecation, and crash report types defined in the Reporting API spec.
 
 
 ## Considered Alternatives
