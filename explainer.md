@@ -1,6 +1,6 @@
 # Storage Corruption Reporting
 
-[wanderview@google.com](mailto:wanderview@google.com)
+Author: [wanderview@google.com](mailto:wanderview@google.com)
 
 [Tag Review](https://github.com/w3ctag/design-reviews/issues/419)
 
